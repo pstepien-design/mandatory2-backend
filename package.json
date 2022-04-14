@@ -1,7 +1,15 @@
 {
+  "scripts": {
+    "createdb": "node ./database/createSchemaItems.js"
+  },
   "dependencies": {
+    "body-parser": "^1.20.0",
     "cors": "^2.8.5",
-    "express": "^4.17.2"
+    "express": "^4.17.2",
+    "firebase": "^9.6.10",
+    "node-fetch": "^3.2.3",
+    "sqlite": "^4.0.25",
+    "sqlite3": "^5.0.2"
   },
   "type": "module"
 }

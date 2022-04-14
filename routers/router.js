@@ -1,30 +1,33 @@
 import { Router } from 'express';
+import db from '../database/CreateConnection.js';
+import {login} from '../authentication/authentication.js';
 const router = Router();
 
-const Items = [
-  {
-    id: 1, name: "hoodie", price: 500, description: "nice"
-  },
-  {
-    id: 2, name: "cup", price: 250, description: "supernice"
-  },
-  {
-    id: 3, name: "something", price: 1000, description: "expensive"
-  },
-  {
-    id: 4, name: "Notebook", price: 100, description: "necessary"
-  },
-  {
-    id: 5, name: "Pen", price: 50, description: "Cheap"
-  },
-  {
-    id: 6, name: "Pencil", price: 20, description: "The cheapest"
-  }
-]
+
+
+
 
 router.get('/api/items', async (req, res) => {
-  const items = Items
+  const items = await db.all('SELECT * FROM items;');
   res.send({ data: items });
 });
 
+router.get('/api/items/:id', async (req, res) => {
+  const id = Number(req.params.id);
+  const item = await db.all(`SELECT * FROM items WHERE id = ${id};`);
+  res.send({ data: item });
+});
+
+router.post('/auth/login', async (req, res) => {
+const email = req.body.email;
+const password = req.body.password;
+const response =  await login(email, password);
+ if(response){
+  res.send({ 'isAuthorized': true });   
+  }
+  else{
+    res.send({ 'isAuthorized': false });
+  } 
+})
+ 
 export default router;

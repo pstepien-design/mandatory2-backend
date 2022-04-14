@@ -8,6 +8,7 @@ app.use(express.json());
 import router from './routers/router.js';
 app.use(router);
 
+
 app.get('/', (req, res) => {
   res.send({ message: 'This is a get request' });
 });
