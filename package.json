@@ -1,13 +1,17 @@
 {
   "scripts": {
-    "createdb": "node ./database/createSchemaItems.js"
+    "createdb": "node ./database/createSchemaItems.js",
+    "dev": "nodemon app.js"
   },
   "dependencies": {
     "body-parser": "^1.20.0",
     "cors": "^2.8.5",
+    "dotenv": "^16.0.0",
     "express": "^4.17.2",
     "firebase": "^9.6.10",
+    "jsonwebtoken": "^8.5.1",
     "node-fetch": "^3.2.3",
+    "nodemailer": "^6.7.3",
     "sqlite": "^4.0.25",
     "sqlite3": "^5.0.2"
   },
