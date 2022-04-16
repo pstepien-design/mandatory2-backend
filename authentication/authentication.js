@@ -1,6 +1,10 @@
 import fetch from 'node-fetch';
-export const signup = async (email, password) => {
-    const API_KEY = "AIzaSyAv65M0n9HeBOXciVuCKR5fpgW8LySKFY0";
+import dotenv from 'dotenv';
+import jwt from 'jsonwebtoken';
+dotenv.config({path: './.env'});
+
+ export const signup = async (email, password) => {
+    const API_KEY = process.env.API_KEY;
     const response = await fetch(
       `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${API_KEY}`,
       {
@@ -26,7 +30,7 @@ export const signup = async (email, password) => {
 
   export const login = async (email, password) => {
     let isAuthorized = false;
-    const API_KEY = "AIzaSyAv65M0n9HeBOXciVuCKR5fpgW8LySKFY0";
+    const API_KEY = process.env.API_KEY;
     const response = await fetch(
       `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${API_KEY}`,
       {
@@ -48,6 +52,23 @@ export const signup = async (email, password) => {
     return isAuthorized;
   };
 
-/*  const answer = await login('test@test.com', '113322'); */
+
+  export const authenticateToke = (token) => {
+    let isAuthorized = false;
+    jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, decryptedToken) => {
+      if(err){
+        console.log(err)
+      }
+      else{
+      console.log(decryptedToken);
+      isAuthorized = decryptedToken.isAuthorized ; 
+      }
+
+    })
+    return isAuthorized;
+  } 
+
+
+
  
 
