@@ -24,7 +24,6 @@ dotenv.config({path: './.env'});
       console.log(problem);
     } else {
       const data = await response.json(); // json to javascript
-      console.log('data from the server', data);
     }
   };
 
@@ -60,7 +59,6 @@ dotenv.config({path: './.env'});
         console.log(err)
       }
       else{
-      console.log(decryptedToken);
       isAuthorized = decryptedToken.isAuthorized ; 
       }
 
